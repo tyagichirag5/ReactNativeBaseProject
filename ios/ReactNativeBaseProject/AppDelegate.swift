@@ -33,6 +33,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+  var window: UIWindow?
+
+  func scene(
+    _ scene: UIScene,
+    willConnectTo session: UISceneSession,
+    options connectionOptions: UIScene.ConnectionOptions
+  ) {
+    guard let windowScene = scene as? UIWindowScene else { return }
+
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    if let appWindow = appDelegate?.window {
+      appWindow.windowScene = windowScene
+      self.window = appWindow
+      appWindow.makeKeyAndVisible()
+    }
+  }
+}
+
 class ReactNativeDelegate: RCTDefaultReactNativeFactoryDelegate {
   override func sourceURL(for bridge: RCTBridge) -> URL? {
     self.bundleURL()
